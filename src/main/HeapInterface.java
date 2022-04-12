@@ -1,14 +1,14 @@
 
-public interface HeapInterface<T> {
+public interface HeapInterface<T extends Comparable<? super T>>{ 
+    // type parameter must support comparison with other instances of its own type
 
     public boolean isEmpty();
-
-    public boolean insert(T data);
-
-    public boolean optimalAdd(T data);
-
-    public T remove();
-
     public int getSize();
+
+    public T removeRoot();
+    public T getRoot();
+
+    public boolean add(T entry);
+    public void clear();
 
 }
