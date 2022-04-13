@@ -1,3 +1,4 @@
+package main;
 
 public class ArrayMaxHeap implements HeapInterface<Integer>{
 
@@ -129,4 +130,16 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
             return false;
         }
     }
+
+    public static ArrayMaxHeap sequentialInsertBuild(int[] unsortedArray){
+
+        return null;
+    }
+
+    public static ArrayMaxHeap optimalMethodBuild(int[] unsortedArray){
+        
+        return null;
+    }
+
+
 }

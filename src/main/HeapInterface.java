@@ -1,4 +1,7 @@
 
+package main;
+
+
 public interface HeapInterface<T extends Comparable<? super T>>{ 
     // type parameter must support comparison with other instances of its own type
 
