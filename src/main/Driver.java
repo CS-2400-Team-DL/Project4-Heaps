@@ -41,10 +41,9 @@ public class Driver{
         int swaps = heap1.sequentialInsertBuild(intArray);
         
         
-	
-        //ArrayMaxHeap heap2 = ArrayMaxHeap.optimalMethodBuild(intArray);
+        // create heap 2 with optimal method
         
-        
+        // output to file
 
     }
 }
