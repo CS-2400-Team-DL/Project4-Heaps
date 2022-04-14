@@ -30,6 +30,11 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
         return (indexOfLast < 1);
     }
 
+    public int[] getHeap(){
+        return heap;
+    }
+
+
     @Override
     public int getSize() {
         return indexOfLast;
