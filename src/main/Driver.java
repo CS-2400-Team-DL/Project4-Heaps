@@ -19,7 +19,7 @@ public class Driver{
                 file.createNewFile();
             }
 
-            Scanner input = new Scanner(new FileReader(file));
+            Scanner input = new Scanner(file);
 
             while (input.hasNextInt()) {
                 data.add(input.nextInt());
@@ -31,14 +31,19 @@ public class Driver{
             e.printStackTrace();
         }
         
-        System.out.println(data.size());
         int[] intArray = new int[data.size()];
-        System.out.println(intArray.length);
-
-        for(int i=0; i < data.size(); i++){
-            intArray[i] = data.remove(i);
+        int DATASIZE = data.size();
+        for(int i=0; i< DATASIZE; i++){
+        	intArray[i] = data.remove(0);
         }
-
+        
+        ArrayMaxHeap heap1 = new ArrayMaxHeap(intArray.length);
+        int swaps = heap1.sequentialInsertBuild(intArray);
+        
+        
+	
+        //ArrayMaxHeap heap2 = ArrayMaxHeap.optimalMethodBuild(intArray);
+        
         
 
     }

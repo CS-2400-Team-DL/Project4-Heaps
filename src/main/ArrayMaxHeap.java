@@ -131,14 +131,32 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
         }
     }
 
-    public static ArrayMaxHeap sequentialInsertBuild(int[] unsortedArray){
-
-        return null;
+    public int sequentialInsertBuild(int[] intArray){
+    	int swaps = 0;
+		
+		
+		for (int i=0; i < intArray.length; i++) {
+			
+			int newIndex = indexOfLast + 1;
+			int parent = newIndex / 2;
+			while( (parent > 0) && (intArray[i] >= heap[parent]) ) {
+				swaps++;
+				heap[newIndex] = heap[parent];
+				newIndex = parent;
+				parent = newIndex / 2;
+			}
+			
+			heap[newIndex] = intArray[i];
+			indexOfLast++;
+        
+		}
+		
+		return swaps;
     }
 
-    public static ArrayMaxHeap optimalMethodBuild(int[] unsortedArray){
+    public void  optimalMethodBuild(int[] unsortedArray){
         
-        return null;
+        
     }
 
 
