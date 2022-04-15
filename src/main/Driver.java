@@ -7,32 +7,41 @@ import java.util.Scanner;
 public class Driver{
 
     public static void main(String[] args){
-	    
         //Get input from data.txt
         ArrayList<Integer> data = new ArrayList<>();
         File file = new File("data.txt");
+
         try {
+
             if (file.exists()){
-                System.out.println("Reading " + file.getName());
+                System.out.println(" Reading " + file.getName());
             } else {
-                System.out.println(file.getName() + " created");
+                System.out.println(" "+file.getName() + "was created at " + file.getAbsolutePath());
                 file.createNewFile();
             }
 
             Scanner input = new Scanner(file);
-
-            while (input.hasNextInt()) {
-                data.add(input.nextInt());
-            }
-
+            int onLine = 1;
+            while (input.hasNext()){
+                if (input.hasNextInt()) {
+                    data.add(input.nextInt());
+                }
+                else{
+                    input.next();
+                    System.out.println(" NON-integer in data.txt on line " + onLine);
+                }
+                onLine++;
+            }   
             input.close();
             
         }catch(IOException e) {
             e.printStackTrace();
         }
+
         int DATASIZE = data.size();
         int[] intArray = new int[DATASIZE];
-        for(int i=0; i< DATASIZE; i++){
+
+        for(int i=0; i<DATASIZE; i++){
         	intArray[i] = data.remove(0);
         }
         // Data from data.txt has been moved into intArray
@@ -62,14 +71,13 @@ public class Driver{
             int swaps2;
             String toFile2;
 
-
             File output = new File("output.txt");
             try{
                 if(!output.exists()){
                     output.createNewFile();
-                    System.out.println("Output created at: " + output.getAbsolutePath());
+                    System.out.println(" Output created at: " + output.getAbsolutePath());
                 } else {
-                    System.out.println("output.txt has been updated");
+                    System.out.println(" Output.txt has been updated");
                     output.delete();
                     output.createNewFile();
                 }
