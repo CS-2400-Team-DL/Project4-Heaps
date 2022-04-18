@@ -12,12 +12,12 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
     public ArrayMaxHeap(){
         this(DEFAULT_CAPACITY);
     }
-    public ArrayMaxHeap(int size){
-        if (size == MAX_CAPACITY){
+    public ArrayMaxHeap(int initialSize){
+        if (initialSize == MAX_CAPACITY){
             isMaxed = true;
             heap = new int[MAX_CAPACITY + 1];
-        } else if (size < MAX_CAPACITY){
-            heap = new int[size + 1];
+        } else if (initialSize < MAX_CAPACITY){
+            heap = new int[initialSize + 1];
             isMaxed = false;
         } else {
             throw new IllegalArgumentException("Capacity exceeds limit");
@@ -144,6 +144,9 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
 			
 			int newIndex = indexOfLast + 1;
 			int parent = newIndex / 2;
+
+            if (newIndex >= heap.length) {growArray();}
+
 			while( (parent > 0) && (intArray[i] >= heap[parent]) ) {
 				swaps++;
 				heap[newIndex] = heap[parent];

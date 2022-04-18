@@ -7,50 +7,18 @@ import java.util.Scanner;
 public class Driver{
 
     public static void main(String[] args){
+
         //Get input from data.txt
-        ArrayList<Integer> data = new ArrayList<>();
-        File file = new File("data.txt");
-
-        try {
-
-            if (file.exists()){
-                System.out.println(" Reading " + file.getName());
-            } else {
-                System.out.println(" "+file.getName() + "was created at " + file.getAbsolutePath());
-                file.createNewFile();
-            }
-
-            Scanner input = new Scanner(file);
-            int onLine = 1;
-            while (input.hasNext()){
-                if (input.hasNextInt()) {
-                    data.add(input.nextInt());
-                }
-                else{
-                    input.next();
-                    System.out.println(" NON-integer in data.txt on line " + onLine);
-                }
-                onLine++;
-            }   
-            input.close();
-            
-        }catch(IOException e) {
-            e.printStackTrace();
-        }
-
-        int DATASIZE = data.size();
-        int[] intArray = new int[DATASIZE];
-
-        for(int i=0; i<DATASIZE; i++){
-        	intArray[i] = data.remove(0);
-        }
+        int[] intArray = getInput();
         // Data from data.txt has been moved into intArray
+
         if(intArray.length > 0){
 
-            ArrayMaxHeap heap1 = new ArrayMaxHeap(intArray.length);
+            ArrayMaxHeap heap1 = new ArrayMaxHeap();
             int swaps1 = heap1.sequentialInsertBuild(intArray);
         
-            String toFile1 = "Heap1:\nHeap built using sequential insertions: ";
+            // Format the string toFile1 for heap 1
+            String toFile1 = "\nHeap1:\nHeap built using sequential insertions: ";
             for(int i=1;i<=10;i++){
                 toFile1 += heap1.getHeap()[i] + ", ";
             } 
@@ -65,12 +33,14 @@ public class Driver{
             for(int i=1;i<=10;i++){
                 toFile1 += heap1.getHeap()[i] + ", ";
             }    
+            // End of String formating
             
             ArrayMaxHeap heap2 = new ArrayMaxHeap(intArray.length);
             // create heap 2 with optimal method
             int swaps2;
             String toFile2;
 
+            // Output to a file
             File output = new File("output.txt");
             try{
                 if(!output.exists()){
@@ -88,11 +58,49 @@ public class Driver{
                 writer1.close();
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException e) {   e.printStackTrace();    }
+
         } else {
             System.out.println("data.txt is empty");
         }
     }
+
+    private static int[] getInput(){
+
+        ArrayList<Integer> data = new ArrayList<>();
+        File file = new File("data.txt");
+
+        try {
+
+            if (file.exists()){
+                System.out.println(" Reading " + file.getName());
+            } else {
+                System.out.println(" "+file.getName() + "was created at " + file.getAbsolutePath());
+                file.createNewFile();
+            }
+
+            Scanner input = new Scanner(file);
+
+            int line = 1;
+            while (input.hasNext()){
+                if (input.hasNextInt()) {
+                    data.add(input.nextInt());
+                } else{
+                    input.next();
+                    System.out.println(" NON-integer in data.txt on line " + line);
+                }
+                line++;
+            }   
+            input.close();
+            
+        } catch(IOException e) {    e.printStackTrace();    }
+
+        int[] intArray = new int[data.size()];
+        for(int i=0; i<intArray.length ; i++){
+        	intArray[i] = data.remove(0);
+        }
+
+        return intArray;
+    }
+
 }
