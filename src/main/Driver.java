@@ -35,10 +35,24 @@ public class Driver{
             }    
             // End of String formating
             
-            ArrayMaxHeap heap2 = new ArrayMaxHeap(intArray.length);
+            ArrayMaxHeap heap2 = new ArrayMaxHeap();
             // create heap 2 with optimal method
-            int swaps2;
-            String toFile2;
+            int swaps2 = heap2.optimalMethodBuild(intArray);
+            String toFile2 = "\nHeap2:\nHeap built using optimal method: ";
+            for(int i=1;i<=10;i++){
+                toFile2 += heap2.getHeap()[i] + ", ";
+            } 
+
+            toFile2 += "\nNumber of swaps in heap creation: " + swaps2;
+            
+            for(int i=0; i<10;i++){
+                heap2.removeRoot();
+            }
+
+            toFile2 += "\nHeap after 10 removals: ";
+            for(int i=1;i<=10;i++){
+                toFile2 += heap2.getHeap()[i] + ", ";
+            }    
 
             // Output to a file
             File output = new File("output.txt");
@@ -54,7 +68,7 @@ public class Driver{
 
                 FileWriter writer1 = new FileWriter(output);
                 writer1.write(toFile1);
-                //writer1.write(toFile2);
+                writer1.write(toFile2);
                 writer1.close();
 
 
