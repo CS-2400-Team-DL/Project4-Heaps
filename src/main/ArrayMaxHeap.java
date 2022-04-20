@@ -52,7 +52,9 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
         return root;
     }
 
-    private void reHeap(int startingIndex){
+    private int reHeap(int startingIndex){
+        //added amount of swaps to indicate how many times it swapped.
+        int reHeapSwaps = 0;
         boolean done = false;
         int active = heap[startingIndex];
         int leftChild = startingIndex * 2;
@@ -68,11 +70,13 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
                 heap[startingIndex] = heap[largestChild];
                 startingIndex = largestChild;
                 leftChild = 2 * startingIndex;
+                reHeapSwaps++;
             } else {
                 done = true;
             }
         }
         heap[startingIndex] = active;
+        return reHeapSwaps;
     }
 
     @Override
@@ -175,8 +179,7 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
         }
 
         for (int rootIndex = indexOfLast / 2; rootIndex > 0; rootIndex--){
-            reHeap(rootIndex);
-            swaps++;
+            swaps += reHeap(rootIndex);
         }
         return swaps;
     }
