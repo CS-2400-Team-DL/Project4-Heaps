@@ -18,10 +18,16 @@ public class Driver{
             int swaps1 = heap1.sequentialInsertBuild(intArray);
         
             // Format the string toFile1 for heap 1
-            String toFile1 = "\nHeap1:\nHeap built using sequential insertions: ";
-            for(int i=1;i<=10;i++){
-                toFile1 += heap1.getHeap()[i] + ", ";
+            String toFile1 = "";
+            for(int i=1;i<=100;i++){
+                toFile1 += "=";
             } 
+            
+            toFile1 += "\nHeap built using sequential insertions: ";
+            for(int i=1;i<=10;i++){
+                toFile1 += heap1.getHeap()[i] + ",";
+            } 
+            toFile1 += "...";
 
             toFile1 += "\nNumber of swaps in heap creation: " + swaps1;
             
@@ -31,19 +37,24 @@ public class Driver{
 
             toFile1 += "\nHeap after 10 removals: ";
             for(int i=1;i<=10;i++){
-                toFile1 += heap1.getHeap()[i] + ", ";
+                toFile1 += heap1.getHeap()[i] + ",";
             }    
+            toFile1 += "...\n";
             // End of String formating
             
-            ArrayMaxHeap heap2 = new ArrayMaxHeap();
-            // create heap 2 with optimal method
-            int swaps2 = heap2.optimalMethodBuild(intArray);
-            String toFile2 = "\nHeap2:\nHeap built using optimal method: ";
-            for(int i=1;i<=10;i++){
-                toFile2 += heap2.getHeap()[i] + ", ";
-            } 
 
-            toFile2 += "\nNumber of swaps in heap creation: " + swaps2;
+            // create heap 2 with optimal method
+            ArrayMaxHeap heap2 = new ArrayMaxHeap();
+            int swaps2 = heap2.optimalMethodBuild(intArray);
+
+            //Format the string toFile2 for heap 2
+            String toFile2 = "\nHeap built using optimal method: ";
+            for(int i=1;i<=10;i++){
+                toFile2 += heap2.getHeap()[i] + ",";
+            } 
+            toFile2 += "...\n";
+
+            toFile2 += "Number of swaps in heap creation: " + swaps2;
             
             for(int i=0; i<10;i++){
                 heap2.removeRoot();
@@ -51,8 +62,13 @@ public class Driver{
 
             toFile2 += "\nHeap after 10 removals: ";
             for(int i=1;i<=10;i++){
-                toFile2 += heap2.getHeap()[i] + ", ";
+                toFile2 += heap2.getHeap()[i] + ",";
             }    
+            toFile2 += "...\n";
+            for(int i=1;i<=100;i++){
+                toFile2 += "=";
+            } 
+            //End of String formation for heap2 outputs
 
             // Output to a file
             File output = new File("output.txt");
