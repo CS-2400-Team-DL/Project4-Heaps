@@ -71,8 +71,8 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
             } else {
                 done = true;
             }
-            heap[startingIndex] = active;
         }
+        heap[startingIndex] = active;
     }
 
     @Override
@@ -162,9 +162,23 @@ public class ArrayMaxHeap implements HeapInterface<Integer>{
 		return swaps;
     }
 
-    public void  optimalMethodBuild(int[] unsortedArray){
+    public int optimalMethodBuild(int[] unsortedArray){
+        int swaps = 0;
         
-        
+        for (int i=0; i < unsortedArray.length; i++){
+            int newIndex = indexOfLast + 1;
+            if(newIndex >= heap.length){
+                growArray();
+            }
+            heap[newIndex] = unsortedArray[i];
+            indexOfLast++;
+        }
+
+        for (int rootIndex = indexOfLast / 2; rootIndex > 0; rootIndex--){
+            reHeap(rootIndex);
+            swaps++;
+        }
+        return swaps;
     }
 
 
